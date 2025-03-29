@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "../App.css";
 import { Link, useNavigate} from "react-router-dom";
+import backendURL from "../config/config";
 
 const SignIn = async (valid: number, setValid: Function) =>
   {
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
-    const response = await fetch("http://localhost:8080/login/", {
+    const response = await fetch(`${backendURL}/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({username: username, pwd: password}),
