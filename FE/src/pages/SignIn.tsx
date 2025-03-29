@@ -24,6 +24,7 @@ const SignIn = async (valid: number, setValid: Function) =>
     return "/";
   }
 
+
 const SignInPage = () => {
   const navigate = useNavigate();
   const [valid, setValid] = useState<number>(0);
@@ -58,3 +59,4 @@ const SignInPage = () => {
 }
 
 export default SignInPage;
+
