@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "../App.css";
 import { Link, useNavigate} from "react-router-dom";
-import backendURL from "../config/config";
 
 const SignIn = async (valid: number, setValid: Function) =>
   {
+    console.log(Boolean(""))
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
-    const response = await fetch(`${backendURL}/login/`, {
+    const response = await fetch(`${import.meta.env.VITE_BE_URL}/login/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({username: username, pwd: password}),
@@ -23,7 +23,6 @@ const SignIn = async (valid: number, setValid: Function) =>
     setValid(valid+1)
     return "/";
   }
-
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -59,4 +58,3 @@ const SignInPage = () => {
 }
 
 export default SignInPage;
-
