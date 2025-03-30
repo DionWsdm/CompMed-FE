@@ -7,7 +7,7 @@ const SignIn = async (valid: number, setValid: Function) =>
     console.log(Boolean(""))
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
-    const response = await fetch(`${import.meta.env.VITE_BE_URL}/login/`, {
+    const response = await fetch(`${import.meta.env.VITE_BE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({username: username, pwd: password}),
