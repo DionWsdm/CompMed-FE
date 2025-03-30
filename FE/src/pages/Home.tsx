@@ -4,12 +4,13 @@ import Post from "../data/Post";
 import Posts from "../components/Posts";
 
 const signedIn = async () => {
-  if (!document.cookie) 
-  {
-    console.log("It goes here");
-    window.location.href="/";
-  }
-  
+  setTimeout(() => {
+    if (!document.cookie) 
+      {
+        console.log("It goes here");
+        window.location.href="/";
+      }    
+  }, 3000)
 };
 
 const createPost = async () =>
