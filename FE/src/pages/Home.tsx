@@ -49,7 +49,7 @@ const HomePage = () => {
     <>
       <div
         id="root"
-        className="grid grid-cols-[25vw_50vw_25vw] h-full bg-[#F5F5F5]"
+        className="grid grid-cols-[25vw_50vw_25vw] h-full border-gray-400"
       >
         <div className="border-r-[0.7px] border-gray-400 h-[100%] p-1">
           This is navigation
