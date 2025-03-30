@@ -4,12 +4,14 @@ import Post from "../data/Post";
 import Posts from "../components/Posts";
 
 const signedIn = async () => {
-  setTimeout(() => {
-    if (!document.cookie) 
-      {
-        window.location.href="/";
-      }    
-  }, 3000)
+  const response = await fetch(`${import.meta.env.VITE_BE_URL}/login/info`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json"},
+    credentials: "include",
+    })
+  const data = await response.json();
+  if (!data.authInfo)
+    window.location.href = "/";
 };
 
 const createPost = async () =>
@@ -24,13 +26,11 @@ const createPost = async () =>
     headers: { "Content-Type": "application/json"},
     credentials: "include",
   })
-  console.log(response)
   window.location.href="/Home/";
 }
 
 const HomePage = () => {
-  console.log("cookie: ", document.cookie)
-  signedIn();
+  setTimeout(signedIn, 3000);
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BE_URL}/posts`).then((response: Response) => response.json())
