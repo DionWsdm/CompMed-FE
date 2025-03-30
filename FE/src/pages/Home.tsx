@@ -5,8 +5,10 @@ import Posts from "../components/Posts";
 
 const signedIn = async () => {
   if (!document.cookie) 
-    console.log("It goes here")
+  {
+    console.log("It goes here");
     window.location.href="/";
+  }
 };
 
 const createPost = async () =>
