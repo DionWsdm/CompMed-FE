@@ -39,7 +39,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div id="root" className="grid grid-cols-[25vw_50vw_25vw] h-full bg-[#F5F5F5]">
+      <div id="root" className="grid grid-cols-[25vw_50vw_25vw] h-full border-gray-400">
         <div className="border-r-[0.7px] border-gray-400 h-[100%] p-1">This is navigation</div>
         <div className="border-r-[0.7px] border-gray-400 h-[100%] shadow-2xl">
             <div id="post-something" className="flex justify-items-start border-b-[0.7px] h-45 w-[100%] pl-3 pt-3 gap-1.5">
