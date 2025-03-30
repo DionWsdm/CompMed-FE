@@ -4,7 +4,6 @@ import { Link, useNavigate} from "react-router-dom";
 
 const SignIn = async (valid: number, setValid: Function) =>
   {
-    console.log(Boolean(""))
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
     const response = await fetch(`${import.meta.env.VITE_BE_URL}/login`, {
@@ -17,7 +16,6 @@ const SignIn = async (valid: number, setValid: Function) =>
     if (result.success)
     {
       localStorage.setItem("username", username)
-      console.log(document.cookie);
       return "/Home/";
     }
     setValid(valid+1)
@@ -31,9 +29,7 @@ const SignInPage = () => {
   const handleSignIn = async () =>
   {
     const path = await SignIn(valid, setValid);
-    console.log(path)
     navigate(path);
-    console.log("Works")
   }
 
   return (
