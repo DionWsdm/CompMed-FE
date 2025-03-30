@@ -7,8 +7,9 @@ const signedIn = async () => {
   if (!document.cookie) 
   {
     console.log("It goes here");
-    // window.location.href="/";
+    window.location.href="/";
   }
+  
 };
 
 const createPost = async () =>
