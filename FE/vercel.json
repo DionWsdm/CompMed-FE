@@ -3,6 +3,11 @@
       {
         "source": "/api/:path*",
         "destination": "https://compmed-be-production.up.railway.app/:path*"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
     ]
+    
 }
