@@ -12,7 +12,7 @@ const createPost = async () =>
 {
   const textarea = document.getElementById("new-content") as HTMLTextAreaElement;
   const content = textarea.value;
-  const response = await fetch("http://localhost:8080/posts/", {
+  const response = await fetch(`${import.meta.env.VITE_BE_URL}/posts/`, {
     method: "POST",
     body: JSON.stringify({
       konten: content,
@@ -28,7 +28,7 @@ const HomePage = () => {
   signedIn();
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    fetch("http://localhost:8080/posts/").then((response: Response) => response.json())
+    fetch(`${import.meta.env.VITE_BE_URL}/posts/`).then((response: Response) => response.json())
     .then((data) => setPosts(data.posts)).catch((error) => console.log("Error mengambil data: ", error))
   }, [])
 
