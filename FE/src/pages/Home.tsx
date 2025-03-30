@@ -7,7 +7,6 @@ const signedIn = async () => {
   setTimeout(() => {
     if (!document.cookie) 
       {
-        console.log("It goes here");
         window.location.href="/";
       }    
   }, 3000)
@@ -30,6 +29,7 @@ const createPost = async () =>
 }
 
 const HomePage = () => {
+  console.log("cookie: ", document.cookie)
   signedIn();
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
