@@ -18,7 +18,7 @@ const createPost = async () =>
 {
   const textarea = document.getElementById("new-content") as HTMLTextAreaElement;
   const content = textarea.value;
-  const response = await fetch(`${import.meta.env.VITE_BE_URL}/posts`, {
+  await fetch(`${import.meta.env.VITE_BE_URL}/posts`, {
     method: "POST",
     body: JSON.stringify({
       konten: content,
