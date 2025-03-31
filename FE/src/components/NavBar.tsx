@@ -9,10 +9,10 @@ const NavBar = () =>
 {
     return (
         <>
-        <div className="border-r-[0.7px] border-gray-400 h-[100%] p-1 ml-28">
+        <div className="border-r-[0.7px] border-gray-400 h-[100%] p-1 ml-[6vw]">
             <div className="flex flex-col fixed">
                 <div className="flex flex-col items-start h-[90vh] gap-3" id="internal-nav">
-                    <Link to="/Home" className="font-extrabold text-5xl">CompMed</Link>
+                    <Link to="/Home" className="font-extrabold text-[3vw]">CompMed</Link>
                     <Link to="/Home" className="flex flex-row justify-center items-center text-[1.2rem]">
                         <img src={home} alt="icon" className="size-15"/>
                         <p>Home</p>
