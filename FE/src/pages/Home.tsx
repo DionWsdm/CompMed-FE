@@ -3,12 +3,12 @@ import profilepic from "../assets/profilepic.png";
 import Post from "../data/Post";
 import Posts from "../components/Posts";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 const HomePage = () => {
   console.log("rendered")
   const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
-  // const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BE_URL}/posts`)
@@ -51,9 +51,7 @@ const HomePage = () => {
         id="root"
         className="grid grid-cols-[25vw_50vw_25vw] h-full border-gray-400"
       >
-        <div className="border-r-[0.7px] border-gray-400 h-[100%] p-1">
-          This is navigation
-        </div>
+        <NavBar />
         <div className="border-r-[0.7px] border-gray-400 h-[100%] shadow-2xl">
           <div
             id="post-something"
