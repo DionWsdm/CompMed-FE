@@ -4,28 +4,34 @@ import Post from "../data/Post";
 import Posts from "../components/Posts";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Auth from "../data/Auth";
 
 const HomePage = () => {
   console.log("rendered")
   const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
+  const [authInfo, setAuthInfo] = useState<Auth>();
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_BE_URL}/login/info`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response: Response) => response.json())
+      .then((data) => {
+        if (!data.authInfo) 
+          navigate("/");
+        setAuthInfo(data.authInfo);
+      })
+      .catch((error) => console.log("Error mengambil data: ", error));
+  }, [])
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BE_URL}/posts`)
       .then((response: Response) => response.json())
       .then((data) => setPosts(data.posts))
       .catch((error) => console.log("Error mengambil data: ", error));
-  }, [posts]);
-
-  const signedIn = async () => {
-    const response = await fetch(`${import.meta.env.VITE_BE_URL}/login/info`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const data = await response.json();
-    if (!data.authInfo) navigate("/");
-  };
+  }, []);
   
   const createPost = async () => {
     const textarea = document.getElementById(
@@ -42,8 +48,6 @@ const HomePage = () => {
     });
     window.location.reload();
   };
-  
-  setTimeout(signedIn, 500)
 
   return (
     <>
@@ -67,7 +71,7 @@ const HomePage = () => {
                 className="text-2xl mt-3 focus:border-none focus:outline-none"
                 name=""
                 id="new-content"
-                placeholder={`Hi ${localStorage.getItem("username")}! Any Good News?`}
+                placeholder={`Hi ${authInfo?.username}! Any Good News?`}
               ></textarea>
               <div className="flex justify-between">
                 <button className="w-30 h-8 text-[1rem] rounded-full bg-gray-300 hover:bg-gray-400 hover:cursor-pointer">
