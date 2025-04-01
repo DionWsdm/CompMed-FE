@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import profilepic from "../assets/profilepic.png";
-import Post from "../data/Post";
+import Post from "../@Types/Post";
 import Posts from "../components/Posts";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import Auth from "../data/Auth";
+import Auth from "../@Types/Auth";
 
 const HomePage = () => {
   console.log("rendered")
@@ -53,7 +53,7 @@ const HomePage = () => {
     <>
       <div
         id="root"
-        className="grid grid-cols-[25vw_50vw_25vw] h-full border-gray-400"
+        className="grid grid-cols-[25vw_50vw_25vw] h-screen border-gray-400"
       >
         <NavBar />
         <div className="border-r-[0.7px] border-gray-400 h-[100%] shadow-2xl">
