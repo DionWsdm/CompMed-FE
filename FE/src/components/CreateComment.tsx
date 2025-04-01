@@ -1,6 +1,6 @@
 import profilepic from "../assets/profilepic.png";
 
-const adjustHeight = (plus: boolean) =>
+const adjustHeight = (plus: boolean): void =>
 {
     const textarea = document.getElementById("comment-textarea") as HTMLTextAreaElement;
     if(plus)
@@ -12,7 +12,29 @@ const adjustHeight = (plus: boolean) =>
     }
 }
 
-const CreateComment = () => 
+const addComment = async (postid: number): Promise<void> =>
+{
+    const textarea = document.getElementById("comment-textarea") as HTMLTextAreaElement;
+    const content = textarea.value;
+    await fetch(`${import.meta.env.VITE_BE_URL}/comments/${postid}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content: content,
+        }),
+        credentials: "include"
+    });
+    window.location.reload();
+}
+
+const cancelComment = () => 
+{
+    const textarea = document.getElementById("comment-textarea") as HTMLTextAreaElement;
+    textarea.value = "";
+    textarea.rows = 1;
+}
+
+const CreateComment = ({postid} : {postid: number}) =>
 {
     return (
         <>
@@ -28,6 +50,10 @@ const CreateComment = () =>
                             adjustHeight(false)
                     }}></textarea>
                 </div>
+            </div>
+            <div className="flex flex-row justify-end w-full gap-10">
+                <button className="hover:cursor-pointer bg-gray-300 hover:bg-gray-400 pt-1 pb-1 pr-3 pl-3 rounded-full" onClick={cancelComment}>Cancel</button>
+                <button className="hover:cursor-pointer bg-blue-400 hover:bg-blue-500 pt-1 pb-1 pr-3 pl-3 rounded-full text-white" onClick={() => addComment(postid)}>Comment</button>
             </div>
         </div>
         </>
