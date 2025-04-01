@@ -12,7 +12,6 @@ import Post from "../@Types/Post";
 import comment from "../assets/comment.png";
 import heart from "../assets/heart.png";
 import CreateComment from "../components/CreateComment";
-import Comment from "../@Types/Comment";
 
 const PostPage = () =>
 {
