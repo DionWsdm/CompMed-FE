@@ -12,6 +12,7 @@ import Post from "../@Types/Post";
 import comment from "../assets/comment.png";
 import heart from "../assets/heart.png";
 import CreateComment from "../components/CreateComment";
+import Comment from "../@Types/Comment";
 
 const PostPage = () =>
 {
@@ -33,8 +34,6 @@ const PostPage = () =>
         })
         .catch((error) => console.log("Error mengambil data: ", error));
     }, [])
-
-    console.log("authInfo: ", authInfo)
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BE_URL}/posts/${authInfo?.userid}/${postid}`, {
@@ -84,7 +83,7 @@ const PostPage = () =>
                             </div>
                         </div>
                     </div>
-                    <CreateComment />
+                    <CreateComment postid={Number(postid)}/>
                     <Comments postid={Number(postid)} />
                 </div>
             </div>
