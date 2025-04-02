@@ -6,8 +6,8 @@ type Post =
     image_url: string,
     created_at: Date,
     username: string,
-    likes: number,
     comments: number,
+    likes: number,
 }
 
 export default Post;
