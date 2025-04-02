@@ -7,7 +7,6 @@ import NavBar from "../components/NavBar";
 import Auth from "../@Types/Auth";
 
 const HomePage = () => {
-  console.log("rendered")
   const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
   const [authInfo, setAuthInfo] = useState<Auth>();
@@ -86,7 +85,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <Posts posts={posts} />
+          <Posts posts={posts}/>
         </div>
         <div className="p-1">This is your side</div>
       </div>

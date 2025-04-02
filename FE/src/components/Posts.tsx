@@ -3,9 +3,23 @@ import profilepic from "../assets/profilepic.png";
 import { Link } from "react-router-dom";
 import comment from "../assets/comment.png";
 import heart from "../assets/heart.png";
+import heartClicked from "../assets/heartClicked.png";
 import Utils from "../utils/Utils";
+import { useEffect, useState } from "react";
 
 const Posts = ({posts}: {posts: Post[]}) => {
+  const [liked, setLiked] = useState<number[]>([])
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_BE_URL}/likes`, {
+      method: "GET",
+      credentials: "include",
+    })
+    .then((response: Response) => response.json())
+    .then((data) => setLiked(data.likedPosts))
+    .catch((error) => console.log("Error mengambil data: ", error))
+  }, [])
+
   return (
     <>
       {posts.map((post) => (
@@ -20,7 +34,7 @@ const Posts = ({posts}: {posts: Post[]}) => {
               {(post.image_url) ? <img src={post.image_url} alt="" className=""/> : <></>}
               <div className="flex flex-row gap-15">
                 <div className="flex flex-row items-center gap-1 text-[14px]"><img src={comment} alt="" className="size-[1rem] mt-0.5"/><p>{post.comments}</p></div>
-                <div className="flex flex-row items-center gap-1 text-[14px]"><img src={heart} alt="" className="size-4 mt-0.5"/><p>{post.likes}</p></div>
+                <div className="flex flex-row items-center gap-1 text-[14px]"><img src={liked.includes(post.id) ? heartClicked : heart} alt="" className="size-4 mt-0.5"/><p>{post.likes}</p></div>
               </div>
             </div>
         </div>

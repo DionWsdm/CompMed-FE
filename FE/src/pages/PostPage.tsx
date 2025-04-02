@@ -11,14 +11,42 @@ import Utils from "../utils/Utils";
 import Post from "../@Types/Post";
 import comment from "../assets/comment.png";
 import heart from "../assets/heart.png";
+import heartClicked from "../assets/heartClicked.png";
 import CreateComment from "../components/CreateComment";
 
 const PostPage = () =>
 {
     const navigate = useNavigate();
+    const [likeStatus, setLikeStatus] = useState<boolean>(false);
     const [post, setPost] = useState<Post>();
     const {username, postid} = useParams();
     const [authInfo, setAuthInfo] = useState<Auth>();
+
+    const handleLike = async () => 
+    {
+        if (!likeStatus)
+        {
+            console.log("Liking")
+            await fetch(`${import.meta.env.VITE_BE_URL}/likes/${postid}`, {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },            
+            })
+            .then((response: Response) => setLikeStatus(response.status === 201))
+            .catch((error) => console.log("Error mengambil data: ", error));
+        }
+        else
+        {
+            console.log("Unliking")
+            await fetch(`${import.meta.env.VITE_BE_URL}/likes/${postid}`, {
+                method: "DELETE",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },            
+            })
+            .then((response: Response) => setLikeStatus(!(response.status === 204)))
+            .catch((error) => console.log("Error mengambil data: ", error));
+        }
+    }
 
     useEffect(() => {
       fetch(`${import.meta.env.VITE_BE_URL}/login/info`, {
@@ -30,6 +58,7 @@ const PostPage = () =>
             if (!data.authInfo) 
                 navigate("/");
             setAuthInfo(data.authInfo);
+            
         })
         .catch((error) => console.log("Error mengambil data: ", error));
     }, [])
@@ -42,7 +71,20 @@ const PostPage = () =>
         .then((response: Response) => response.json())
         .then((data) => setPost(data.post))
         .catch((error) => console.log("Error mengambil data: ", error));
-    }, [])
+    }, [likeStatus])
+
+    useEffect(() => {
+        console.log("authInfo userid: ", authInfo?.userid)
+        fetch(`${import.meta.env.VITE_BE_URL}/likes/${authInfo?.userid}/${postid}`, {
+            method: "GET",
+            credentials: "include",
+        })
+        .then((response: Response) => setLikeStatus(response.status === 200))
+        .catch((error) => console.log("Error mengambil data: ", error));
+    }, [authInfo])
+
+    console.log("Like status: ", likeStatus);
+    console.log("here", authInfo);
 
     if (!post)
         return (
@@ -78,7 +120,7 @@ const PostPage = () =>
                             </div>
                             <div className="flex flex-row gap-15 items-start mb-3">
                                 <div className="flex flex-row items-center gap-1 text-[14px] hover:cursor-pointer"><img src={comment} alt="" className="size-[1rem] mt-0.5"/><p>{post.comments}</p></div>
-                                <div className="flex flex-row items-center gap-1 text-[14px] hover:cursor-pointer"><img src={heart} alt="" className="size-4 mt-0.5"/><p>{post.likes}</p></div>
+                                <button onClick={handleLike}><div className="flex flex-row items-center gap-1 text-[14px] hover:cursor-pointer"><img src={likeStatus ? heartClicked : heart} alt="" className="size-4 mt-0.5"/><p>{post.likes}</p></div></button>
                             </div>
                         </div>
                     </div>
