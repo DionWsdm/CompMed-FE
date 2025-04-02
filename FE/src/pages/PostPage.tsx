@@ -139,7 +139,7 @@ const PostPage = () =>
                 </div>
             </div>
         </div>
-        {showEditPopUp && <EditPopUp />}
+        {showEditPopUp && <EditPopUp setPopUpEdit={setShowEditPopUp} post={post}/>}
         {showDeletePopUp && <DeletePopUp setPopUpDelete={setShowDeletePopUp} postid={Number(postid)}/>}
         </>
     )
