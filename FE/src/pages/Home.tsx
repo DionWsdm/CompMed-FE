@@ -4,6 +4,7 @@ import Post from "../@Types/Post";
 import Posts from "../components/Posts";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import CommunityBar from "../components/CommunityBar";
 import Auth from "../@Types/Auth";
 
 const HomePage = () => {
@@ -87,7 +88,7 @@ const HomePage = () => {
           </div>
           <Posts posts={posts}/>
         </div>
-        <div className="p-1">This is your side</div>
+        <CommunityBar />
       </div>
     </>
   );
